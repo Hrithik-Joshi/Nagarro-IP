@@ -31,7 +31,6 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
 
     lateinit var binding: FragmentSearchNewsBinding
 
-
     val TAG = "SearchNewsFragment"
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -45,8 +44,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
                 putSerializable("article", it)
             }
             findNavController().navigate(
-                R.id.action_searchNewsFragment_to_articleFragment,
-                bundle
+                R.id.action_searchNewsFragment_to_articleFragment, bundle
             )
         }
 
@@ -68,7 +66,7 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
             when (response) {
                 is Resource.Success -> {
                     hideProgressBar()
-
+                    hideErrorMessage()
                     response.data?.let { newsResponse ->
                         newsAdapter.differ.submitList(newsResponse.articles)
 
@@ -104,11 +102,11 @@ class SearchNewsFragment : Fragment(R.layout.fragment_search_news) {
         itemErrorMessage.visibility = View.INVISIBLE
     }
 
-    private fun showErrorMessage(message:String) {
+    private fun showErrorMessage(message: String) {
         val itemErrorMessage = binding.root.findViewById<View>(R.id.itemErrorMessage)
-        itemErrorMessage.visibility=View.VISIBLE
+        itemErrorMessage.visibility = View.VISIBLE
         val tvErrorMessage = binding.root.findViewById<TextView>(R.id.tvErrorMessage)
-        tvErrorMessage.text=message
+        tvErrorMessage.text = message
     }
 
     private fun hideProgressBar() {

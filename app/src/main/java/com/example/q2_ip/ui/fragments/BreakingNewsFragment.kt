@@ -56,7 +56,8 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
                 is Resource.Error -> {
                     hideProgressBar()
                     response.message?.let { message ->
-                        Toast.makeText(activity, "Error occurred $message",Toast.LENGTH_LONG).show()
+                        Toast.makeText(activity, "Error occurred $message", Toast.LENGTH_LONG)
+                            .show()
                         showErrorMessage(message)
                     }
                 }
@@ -68,19 +69,20 @@ class BreakingNewsFragment : Fragment(R.layout.fragment_breaking_news) {
         })
         val btnRetry = binding.root.findViewById<View>(R.id.btnRetry)
         btnRetry.setOnClickListener {
-            viewModel.getBreakingNews("us")
+            viewModel.getBreakingNews("in")
         }
     }
+
     private fun hideErrorMessage() {
         val itemErrorMessage = binding.root.findViewById<View>(R.id.itemErrorMessage)
-        itemErrorMessage.visibility=View.INVISIBLE
+        itemErrorMessage.visibility = View.INVISIBLE
     }
 
-    private fun showErrorMessage(message:String) {
+    private fun showErrorMessage(message: String) {
         val itemErrorMessage = binding.root.findViewById<View>(R.id.itemErrorMessage)
-        itemErrorMessage.visibility=View.VISIBLE
+        itemErrorMessage.visibility = View.VISIBLE
         val tvErrorMessage = binding.root.findViewById<TextView>(R.id.tvErrorMessage)
-        tvErrorMessage.text=message
+        tvErrorMessage.text = message
     }
 
     private fun hideProgressBar() {
